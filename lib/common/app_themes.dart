@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/common/app_colors.dart';
+import 'package:weather_app/common/app_text_theme.dart';
 
 class AppThemes {
   static final ThemeData appTheme = ThemeData(
@@ -13,9 +14,13 @@ class AppThemes {
       error: Colors.red,
       onError: Colors.white,
       background: AppColors.darkPurple,
-      onBackground: Colors.white,
+      onBackground: Colors.grey,
       surface: AppColors.darkBlue,
       onSurface: Colors.grey,
+    ),
+    textTheme: AppTextTheme.appTextTheme,
+    bottomSheetTheme: BottomSheetThemeData(
+      backgroundColor: Colors.black.withOpacity(0),
     ),
   );
 }
