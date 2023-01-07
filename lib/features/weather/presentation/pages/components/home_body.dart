@@ -1,13 +1,10 @@
 import 'dart:math';
 import 'dart:ui';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:sizer/sizer.dart';
-import 'package:weather_app/common/app_colors.dart';
 import 'package:weather_app/common/image_resources.dart';
+import 'package:weather_app/features/weather/presentation/pages/components/home_bottom_sheet.dart';
 
 class HomeBody extends StatelessWidget {
   const HomeBody({super.key});
@@ -89,48 +86,8 @@ class HomeBody extends StatelessWidget {
             ],
           ),
         ),
-        bottomSheet(),
+        HomeButtonSheet(),
       ],
-    );
-  }
-
-  DraggableScrollableSheet bottomSheet() {
-    return DraggableScrollableSheet(
-      initialChildSize: 0.3,
-      minChildSize: 0.2,
-      maxChildSize: 1,
-      builder: (context, scrollController) => Container(
-        decoration: BoxDecoration(
-          borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(30), topRight: Radius.circular(30)),
-          gradient: LinearGradient(
-            begin: Alignment.topRight,
-            end: Alignment.bottomLeft,
-            colors: [
-              AppColors.pink.withAlpha(190),
-              AppColors.indigo.withAlpha(190),
-              AppColors.darkBlue.withAlpha(190),
-            ],
-          ),
-        ),
-        child: ClipRRect(
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(30),
-            topRight: Radius.circular(30),
-          ),
-          clipBehavior: Clip.antiAlias,
-          child: BackdropFilter(
-              filter: ImageFilter.blur(
-                sigmaX: 3,
-                sigmaY: 3,
-              ),
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [],
-                ),
-              )),
-        ),
-      ),
     );
   }
 }
