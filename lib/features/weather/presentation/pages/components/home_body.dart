@@ -1,6 +1,3 @@
-import 'dart:math';
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:weather_app/common/image_resources.dart';
@@ -86,7 +83,7 @@ class HomeBody extends StatelessWidget {
             ],
           ),
         ),
-        HomeButtonSheet(),
+        const HomeButtonSheet(),
       ],
     );
   }

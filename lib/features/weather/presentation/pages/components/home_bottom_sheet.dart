@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:weather_app/common/app_strings.dart';
+import 'package:weather_app/features/weather/presentation/pages/components/hourly_forecast_view.dart';
 
 import '../../../../../common/app_colors.dart';
 
@@ -32,7 +33,7 @@ class _HomeButtonSheetState extends State<HomeButtonSheet>
   Widget build(BuildContext context) {
     return DraggableScrollableSheet(
       initialChildSize: 0.3,
-      minChildSize: 0.2,
+      minChildSize: 0.3,
       maxChildSize: 0.95,
       builder: (context, scrollController) => Container(
         decoration: BoxDecoration(
@@ -75,17 +76,12 @@ class _HomeButtonSheetState extends State<HomeButtonSheet>
                     ],
                   ),
                   SizedBox(
-                    height: 80.h,
+                    height: 90.h,
                     width: 100.w,
                     child: TabBarView(
                       controller: _controller,
                       children: [
-                        Container(
-                          color: Colors.transparent,
-                          child: const Center(
-                            child: Text('Home'),
-                          ),
-                        ),
+                        HourlyForecastView(controller: scrollController),
                         Container(
                           color: Colors.transparent,
                           child: const Center(
