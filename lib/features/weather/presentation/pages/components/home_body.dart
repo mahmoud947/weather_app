@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:weather_app/common/image_resources.dart';
+import 'package:weather_app/core/presentation/dialog/generic_dialog.dart';
 import 'package:weather_app/features/weather/presentation/pages/components/home_bottom_sheet.dart';
 
 class HomeBody extends StatelessWidget {
@@ -83,6 +84,25 @@ class HomeBody extends StatelessWidget {
             ],
           ),
         ),
+        Positioned(
+            top: 40.h,
+            left: 0,
+            right: 0,
+            child: TextButton(
+                onPressed: () {
+                  showGenericDialog(
+                    context: context,
+                    title: 'title',
+                    content: 'content',
+                    optionBuilder: () => {'yes': 1, 'no': 0},
+                    callBack: (result) {
+                      print(result);
+                    },
+                  );
+                },
+                child: Text(
+                  'Click me ',
+                ))),
         const HomeButtonSheet(),
       ],
     );
