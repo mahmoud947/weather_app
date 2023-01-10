@@ -13,8 +13,8 @@ class ConditionDto {
 
   factory ConditionDto.fromMap(Map<String, dynamic> map) {
     return ConditionDto(
-      condition: map['condition'],
-      iconUrl: 'https://${map['iconUrl']}',
+      condition: map['text'],
+      iconUrl: 'https://${map['icon']}',
     );
   }
 

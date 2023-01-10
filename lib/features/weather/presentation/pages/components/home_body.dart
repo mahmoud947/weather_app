@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+import 'package:weather_app/features/weather/data/data_sources/remote/weather_service.dart';
+import 'package:weather_app/features/weather/data/data_sources/remote/weather_service_impl.dart';
 import 'package:weather_app/features/weather/data/mappers/weather_dto_to_domain.dart';
 import '../../../../../common/image_resources.dart';
 import '../../../../../core/network/network_helper.dart';
@@ -95,28 +97,16 @@ class HomeBody extends StatelessWidget {
           right: 0,
           child: TextButton(
             onPressed: () async {
-              final NetworkHelper clint = NetworkHelperBuilder()
+              final NetworkHelper client = NetworkHelperBuilder()
                   .setBaseUrl('http://api.weatherapi.com')
                   .addQueryInterceptor(
                       {'key': '2d1c06112751427d8b6164714221811'}).build();
-              final response =
-                  await clint.get(path: '/v1/forecast.json', queryParameters: {
-                'q': 'London',
-                'days': '7',
-                'aqi': 'yes',
-              });
-              if (response.statusCode == 200) {
-                print(
-                  await response
-                      .transform(utf8.decoder)
-                      .join()
-                      .then((json) =>
-                          WeatherResponseDto.fromJson(json).toDomain())
-                      .then((value) => value.forecast[0]!.hours[0]!.pressure),
-                );
-              }
+              final WeatherService service = WeatherServiceImpl(client: client);
+
+              final foo = await service.getForecast();
+              print(foo.currentDto.conditionDto?.iconUrl);
             },
-            child: Text(
+            child: const Text(
               'Click me',
             ),
           ),
