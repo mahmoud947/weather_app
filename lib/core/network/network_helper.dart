@@ -20,6 +20,7 @@ class NetworkHelper<T> {
     required String path,
     Map<String, dynamic>? queryParameters,
   }) async {
+    // check if _queryInterceptor and add it to _queryInterceptor
     if (_queryInterceptor != null) {
       queryParameters?.addAll(_queryInterceptor!);
     }
@@ -27,6 +28,7 @@ class NetworkHelper<T> {
     Uri uri = Uri.https(
       _baseUrl?.replaceAll('https://', '') ?? path,
       path,
+      // add queryParameters to all request
       queryParameters ?? _queryInterceptor,
     );
     return await _httpClient
