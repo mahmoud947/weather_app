@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-import 'package:weather_app/common/app_routes.dart';
-import 'package:weather_app/common/app_themes.dart';
+
+import 'common/app_routes.dart';
+import 'common/app_themes.dart';
 
 void main() {
   runApp(const MyApp());

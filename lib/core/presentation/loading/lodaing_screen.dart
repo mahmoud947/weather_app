@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:weather_app/common/app_colors.dart';
-import 'package:weather_app/core/presentation/loading/loading_screen_controller.dart';
+import '../../../common/app_colors.dart';
+import 'loading_screen_controller.dart';
 
 class LoadingScreen {
   // lazy singleton pattern

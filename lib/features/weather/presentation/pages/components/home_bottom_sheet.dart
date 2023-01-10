@@ -2,8 +2,8 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-import 'package:weather_app/common/app_strings.dart';
-import 'package:weather_app/features/weather/presentation/pages/components/hourly_forecast_view.dart';
+import '../../../../../common/app_strings.dart';
+import 'hourly_forecast_view.dart';
 
 import '../../../../../common/app_colors.dart';
 

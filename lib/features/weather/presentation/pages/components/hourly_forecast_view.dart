@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-import 'package:weather_app/common/app_colors.dart';
-import 'package:weather_app/features/weather/presentation/pages/components/hourly_forecast_card.dart';
+import '../../../../../common/app_colors.dart';
+import 'hourly_forecast_card.dart';
 
 class HourlyForecastView extends StatelessWidget {
   const HourlyForecastView({super.key, required this.controller});

@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:weather_app/features/weather/data/dto/base_weather_condition_dto.dart';
+import 'base_weather_condition_dto.dart';
 import 'condition_dto.dart';
 
 class HourDto extends BaseWeatherConditionDto {

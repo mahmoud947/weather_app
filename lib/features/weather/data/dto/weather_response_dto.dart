@@ -1,9 +1,8 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-import 'package:weather_app/features/weather/data/dto/current_dto.dart';
-import 'package:weather_app/features/weather/data/dto/forecast_day_dto.dart';
-import 'package:weather_app/features/weather/data/dto/location_dto.dart';
+import 'current_dto.dart';
+import 'forecast_day_dto.dart';
+import 'location_dto.dart';
 
 class WeatherResponseDto {
   WeatherResponseDto({
@@ -11,7 +10,7 @@ class WeatherResponseDto {
     required this.currentDto,
     required this.locationDto,
   });
-  final List<ForecastDayDto> forecast;
+  final List<ForecastDayDto?> forecast;
   final CurrentDto currentDto;
   final LocationDto locationDto;
 

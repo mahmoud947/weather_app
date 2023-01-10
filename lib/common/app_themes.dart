@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-import 'package:weather_app/common/app_colors.dart';
-import 'package:weather_app/common/app_text_theme.dart';
+import 'app_colors.dart';
+import 'app_text_theme.dart';
 
 class AppThemes {
   static final ThemeData appTheme = ThemeData(

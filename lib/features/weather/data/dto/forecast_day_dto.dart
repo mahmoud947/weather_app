@@ -9,14 +9,14 @@ import 'day_dto.dart';
 class ForecastDayDto {
   ForecastDayDto({
     this.date,
-    this.day,
-    this.astro,
-    this.hours,
+    this.dayDto,
+    this.astroDto,
+    required this.hoursDto,
   });
   final String? date;
-  final DayDto? day;
-  final AstroDto? astro;
-  final List<HourDto?>? hours;
+  final DayDto? dayDto;
+  final AstroDto? astroDto;
+  final List<HourDto?> hoursDto;
 
   factory ForecastDayDto.fromMap(Map<String, dynamic> map) {
     List<HourDto> hoursFromMap(Iterable<dynamic> maps) {
@@ -25,9 +25,9 @@ class ForecastDayDto {
 
     return ForecastDayDto(
       date: map['date'],
-      day: DayDto.fromMap(map['day'] as Map<String, dynamic>),
-      astro: AstroDto.fromMap(map['astro'] as Map<String, dynamic>),
-      hours: hoursFromMap(map['hour']).toList(),
+      dayDto: DayDto.fromMap(map['day'] as Map<String, dynamic>),
+      astroDto: AstroDto.fromMap(map['astro'] as Map<String, dynamic>),
+      hoursDto: hoursFromMap(map['hour']).toList(),
     );
   }
 

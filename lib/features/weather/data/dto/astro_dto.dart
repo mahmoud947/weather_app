@@ -6,25 +6,25 @@ import 'package:flutter/foundation.dart' show immutable;
 @immutable
 class AstroDto {
   const AstroDto({
-    required this.sunRise,
-    required this.sunSet,
-    required this.moonRise,
-    required this.moonSet,
-    required this.moonPhase,
+    this.sunRise,
+    this.sunSet,
+    this.moonRise,
+    this.moonSet,
+    this.moonPhase,
   });
-  final String sunRise;
-  final String sunSet;
-  final String moonRise;
-  final String moonSet;
-  final String moonPhase;
+  final String? sunRise;
+  final String? sunSet;
+  final String? moonRise;
+  final String? moonSet;
+  final String? moonPhase;
 
   factory AstroDto.fromMap(Map<String, dynamic> map) {
     return AstroDto(
-      sunRise: map['sunrise'] as String,
-      sunSet: map['sunset'] as String,
-      moonRise: map['moonrise'] as String,
-      moonSet: map['moonset'] as String,
-      moonPhase: map['moon_phase'] as String,
+      sunRise: map['sunrise'],
+      sunSet: map['sunset'],
+      moonRise: map['moonrise'],
+      moonSet: map['moonset'],
+      moonPhase: map['moon_phase'],
     );
   }
 

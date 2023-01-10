@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart' show immutable;
-import 'package:weather_app/features/weather/data/dto/base_weather_condition_dto.dart';
-import 'package:weather_app/features/weather/data/dto/condition_dto.dart';
+import 'base_weather_condition_dto.dart';
+import 'condition_dto.dart';
 
 @immutable
 class CurrentDto extends BaseWeatherConditionDto {
