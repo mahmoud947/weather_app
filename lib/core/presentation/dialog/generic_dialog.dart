@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-typedef DialogOptionBuilder<T> = Map<String, T?> Function();
+typedef DialogOptionBuilder<T> = Map<String, T?>;
 typedef DialogCallBack<T> = Function(T?);
 
 Future<T?> showGenericDialog<T>({
@@ -8,9 +8,9 @@ Future<T?> showGenericDialog<T>({
   required String title,
   required String content,
   required DialogOptionBuilder optionBuilder,
-  required DialogCallBack? callBack,
+  required DialogCallBack callBack,
 }) {
-  final option = optionBuilder();
+  final option = optionBuilder;
   return showDialog(
     context: context,
     builder: (context) {
@@ -37,6 +37,6 @@ Future<T?> showGenericDialog<T>({
       );
     },
   ).then(
-    (value) => callBack != null ? callBack(value) : null,
+    (value) => callBack(value),
   );
 }

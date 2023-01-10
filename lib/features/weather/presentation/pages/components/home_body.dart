@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:weather_app/common/image_resources.dart';
+import 'package:weather_app/core/network/network_helper.dart';
 import 'package:weather_app/core/presentation/dialog/generic_dialog.dart';
 import 'package:weather_app/features/weather/presentation/pages/components/home_bottom_sheet.dart';
 
@@ -89,16 +90,12 @@ class HomeBody extends StatelessWidget {
             left: 0,
             right: 0,
             child: TextButton(
-                onPressed: () {
-                  showGenericDialog(
-                    context: context,
-                    title: 'title',
-                    content: 'content',
-                    optionBuilder: () => {'yes': 1, 'no': 0},
-                    callBack: (result) {
-                      print(result);
-                    },
-                  );
+                onPressed: () async {
+                  final NetworkHelper clint = NetworkHelperBuilder()
+                      .setBaseUrl('https://jsonplaceholder.typicode.com')
+                      .addQueryInterceptor({'postId': '2'}).build();
+                  final response = await clint.get(path: '/comments');
+                  print(response);
                 },
                 child: Text(
                   'Click me ',
