@@ -1,5 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:convert';
 import 'dart:io';
 
 class NetworkHelper<T> {
@@ -8,15 +6,17 @@ class NetworkHelper<T> {
     required this.builder,
   })  : _httpClient = builder._httpClient,
         _baseUrl = builder._baseUrl,
-        _queryInterceptor = builder._queryInterceptor;
+        _queryInterceptor = builder._queryInterceptor,
+        _timeOut = builder._timeOut;
 
   final HttpClient _httpClient;
   final NetworkHelperBuilder builder;
   final String? _baseUrl;
   final Map<String, dynamic>? _queryInterceptor;
+  final Duration? _timeOut;
 
   // return json object
-  Future<dynamic> get({
+  Future<HttpClientResponse> get({
     required String path,
     Map<String, dynamic>? queryParameters,
   }) async {
@@ -34,8 +34,7 @@ class NetworkHelper<T> {
     return await _httpClient
         .getUrl(uri)
         .then((req) => req.close())
-        .then((res) => res.transform(utf8.decoder).join())
-        .then((jsonString) => json.decode(jsonString));
+        .timeout(_timeOut ?? const Duration(seconds: 15));
   }
 }
 
@@ -44,11 +43,16 @@ class NetworkHelperBuilder {
   final HttpClient _httpClient = HttpClient();
   String? _baseUrl;
   Map<String, dynamic>? _queryInterceptor;
-
+  Duration? _timeOut;
   NetworkHelperBuilder();
 
   NetworkHelperBuilder setBaseUrl(String baseUrl) {
     _baseUrl = baseUrl;
+    return this;
+  }
+
+  NetworkHelperBuilder setTimeOut(Duration timeOut) {
+    _timeOut = timeOut;
     return this;
   }
 

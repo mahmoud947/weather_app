@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:weather_app/common/image_resources.dart';
@@ -95,10 +97,15 @@ class HomeBody extends StatelessWidget {
                       .setBaseUrl('https://jsonplaceholder.typicode.com')
                       .addQueryInterceptor({'postId': '2'}).build();
                   final response = await clint.get(path: '/comments');
-                  print(response);
+                  if (response.statusCode == 200) {
+                    print(await response
+                        .transform(utf8.decoder)
+                        .join()
+                        .then((jsonString) => json.decode(jsonString)));
+                  }
                 },
                 child: Text(
-                  'Click me ',
+                  'Click me',
                 ))),
         const HomeButtonSheet(),
       ],
