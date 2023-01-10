@@ -22,7 +22,6 @@ class WeatherServiceImpl implements WeatherService {
       },
     );
     if (request.statusCode != 200) {
-      print(request.statusCode);
       throw getExceptionFromStatusCode(request.statusCode);
     }
     return await request
