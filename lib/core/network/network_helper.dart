@@ -26,7 +26,7 @@ class NetworkHelper<T> {
     }
 
     Uri uri = Uri.https(
-      _baseUrl?.replaceAll('https://', '') ?? path,
+      _baseUrl?.replaceAll('http://', '') ?? path,
       path,
       // add queryParameters to all request
       queryParameters ?? _queryInterceptor,

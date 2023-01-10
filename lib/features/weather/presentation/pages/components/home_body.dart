@@ -5,6 +5,7 @@ import 'package:sizer/sizer.dart';
 import 'package:weather_app/common/image_resources.dart';
 import 'package:weather_app/core/network/network_helper.dart';
 import 'package:weather_app/core/presentation/dialog/generic_dialog.dart';
+import 'package:weather_app/features/weather/data/dto/weather_response_dto.dart';
 import 'package:weather_app/features/weather/presentation/pages/components/home_bottom_sheet.dart';
 
 class HomeBody extends StatelessWidget {
@@ -94,14 +95,24 @@ class HomeBody extends StatelessWidget {
             child: TextButton(
                 onPressed: () async {
                   final NetworkHelper clint = NetworkHelperBuilder()
-                      .setBaseUrl('https://jsonplaceholder.typicode.com')
-                      .addQueryInterceptor({'postId': '2'}).build();
-                  final response = await clint.get(path: '/comments');
+                      .setBaseUrl('http://api.weatherapi.com')
+                      .addQueryInterceptor(
+                          {'key': '2d1c06112751427d8b6164714221811'}).build();
+                  final response = await clint
+                      .get(path: '/v1/forecast.json', queryParameters: {
+                    'q': 'London',
+                    'days': '7',
+                    'aqi': 'yes',
+                  });
                   if (response.statusCode == 200) {
-                    print(await response
-                        .transform(utf8.decoder)
-                        .join()
-                        .then((jsonString) => json.decode(jsonString)));
+                    print(
+                      await response
+                          .transform(utf8.decoder)
+                          .join()
+                          .then((json) => WeatherResponseDto.fromJson(json))
+                          .then(
+                              (value) => value.forecast[0].hours![0]!.pressure),
+                    );
                   }
                 },
                 child: Text(
