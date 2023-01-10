@@ -5,6 +5,8 @@ import 'package:sizer/sizer.dart';
 import 'package:weather_app/features/weather/data/data_sources/remote/weather_service.dart';
 import 'package:weather_app/features/weather/data/data_sources/remote/weather_service_impl.dart';
 import 'package:weather_app/features/weather/data/mappers/weather_dto_to_domain.dart';
+import 'package:weather_app/features/weather/data/repositories/weather_repository_impl.dart';
+import 'package:weather_app/features/weather/domain/repositories/weather_repository.dart';
 import '../../../../../common/image_resources.dart';
 import '../../../../../core/network/network_helper.dart';
 import '../../../../../core/presentation/dialog/generic_dialog.dart';
@@ -103,8 +105,11 @@ class HomeBody extends StatelessWidget {
                       {'key': '2d1c06112751427d8b6164714221811'}).build();
               final WeatherService service = WeatherServiceImpl(client: client);
 
-              final foo = await service.getForecast();
-              print(foo.currentDto.conditionDto?.iconUrl);
+              final WeatherRepository repository =
+                  WeatherRepositoryImpl(weatherService: service);
+
+              final foo = await repository.getForecast();
+              print(foo.currentDto.conditionDto.iconUrl);
             },
             child: const Text(
               'Click me',

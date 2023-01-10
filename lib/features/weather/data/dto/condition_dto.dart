@@ -14,7 +14,7 @@ class ConditionDto {
   factory ConditionDto.fromMap(Map<String, dynamic> map) {
     return ConditionDto(
       condition: map['text'],
-      iconUrl: 'https://${map['icon']}',
+      iconUrl: 'https:${map['icon']}',
     );
   }
 
