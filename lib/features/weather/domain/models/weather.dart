@@ -8,7 +8,7 @@ class Weather {
     required this.currentDto,
     required this.locationDto,
   });
-  final List<ForecastDay> forecast;
+  final List<ForecastDay?> forecast;
   final Current currentDto;
   final Location locationDto;
 }

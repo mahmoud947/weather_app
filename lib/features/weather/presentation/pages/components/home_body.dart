@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+import 'package:weather_app/features/weather/data/mappers/weather_dto_to_domain.dart';
 import '../../../../../common/image_resources.dart';
 import '../../../../../core/network/network_helper.dart';
 import '../../../../../core/presentation/dialog/generic_dialog.dart';
@@ -109,9 +110,9 @@ class HomeBody extends StatelessWidget {
                   await response
                       .transform(utf8.decoder)
                       .join()
-                      .then((json) => WeatherResponseDto.fromJson(json))
-                      .then(
-                          (value) => value.forecast[0]?.hoursDto[0]!.pressure),
+                      .then((json) =>
+                          WeatherResponseDto.fromJson(json).toDomain())
+                      .then((value) => value.forecast[0]!.hours[0]!.pressure),
                 );
               }
             },
