@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/di/app_module.dart';
+import 'package:weather_app/di/home_module.dart';
 
 import '../features/weather/presentation/pages/home/home_page.dart';
 
@@ -8,6 +10,8 @@ class AppRoutes {
   static Route? generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case home:
+        initAppModule();
+        initHomeModule();
         return MaterialPageRoute(builder: (context) => const HomePage());
       default:
         return null;

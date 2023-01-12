@@ -5,6 +5,7 @@ import 'package:weather_app/core/platform/network_connection_helper.dart';
 final ls = GetIt.instance;
 
 Future<void> initAppModule() async {
+  //? ...init NetworkHelper
   ls.registerLazySingleton<NetworkHelper>(() {
     return NetworkHelperBuilder()
         .setBaseUrl('http://api.weatherapi.com')
@@ -13,5 +14,6 @@ Future<void> initAppModule() async {
     ).build();
   });
 
+  //? ...init NetworkInfoHelper
   ls.registerLazySingleton<NetworkInfoHelper>(() => NetworkInfoHelperImpl());
 }
