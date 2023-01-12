@@ -1,6 +1,6 @@
 import 'dart:io';
 
-class NetworkHelper<T> {
+class NetworkHelper {
   // builder design pattern
   NetworkHelper({
     required this.builder,

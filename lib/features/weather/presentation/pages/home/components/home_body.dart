@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:weather_app/core/domain/data_state.dart';
 import 'package:weather_app/core/error/exceptions.dart';
-import 'package:weather_app/core/platorm/network_connection_helper.dart';
+import 'package:weather_app/core/platform/network_connection_helper.dart';
 import 'package:weather_app/core/usecase/base_use_case.dart';
 import 'package:weather_app/features/weather/data/data_sources/remote/weather_service.dart';
 import 'package:weather_app/features/weather/data/data_sources/remote/weather_service_impl.dart';
