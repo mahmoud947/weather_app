@@ -8,6 +8,6 @@ class Successfully<T> implements DataState<T> {
 class Loading<T> implements DataState<T> {}
 
 class Error<T> implements DataState<T> {
-  const Error({required this.error});
-  final Object error;
+  const Error({required this.message});
+  final String message;
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../common/app_colors.dart';
+import '../../../../../../common/app_colors.dart';
 
 class HourlyForecastCard extends StatelessWidget {
   const HourlyForecastCard({

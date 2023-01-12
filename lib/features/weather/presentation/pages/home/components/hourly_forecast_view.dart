@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-import '../../../../../common/app_colors.dart';
+import '../../../../../../common/app_colors.dart';
 import 'hourly_forecast_card.dart';
 
 class HourlyForecastView extends StatelessWidget {

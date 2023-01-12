@@ -6,8 +6,8 @@ abstract class NetworkInfoHelper {
   Future<bool> get isConnected;
 }
 
-class NetworkConnectionInfoImpl implements NetworkInfoHelper {
-  NetworkConnectionInfoImpl();
+class NetworkInfoHelperImpl implements NetworkInfoHelper {
+  NetworkInfoHelperImpl();
 
   @override
   Future<bool> get isConnected async {

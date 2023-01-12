@@ -2,19 +2,55 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+import 'package:weather_app/core/domain/data_state.dart';
+import 'package:weather_app/core/error/exceptions.dart';
+import 'package:weather_app/core/platorm/network_connection_helper.dart';
+import 'package:weather_app/core/usecase/base_use_case.dart';
 import 'package:weather_app/features/weather/data/data_sources/remote/weather_service.dart';
 import 'package:weather_app/features/weather/data/data_sources/remote/weather_service_impl.dart';
 import 'package:weather_app/features/weather/data/mappers/weather_dto_to_domain.dart';
 import 'package:weather_app/features/weather/data/repositories/weather_repository_impl.dart';
+import 'package:weather_app/features/weather/domain/models/weather.dart';
 import 'package:weather_app/features/weather/domain/repositories/weather_repository.dart';
-import '../../../../../common/image_resources.dart';
-import '../../../../../core/network/network_helper.dart';
-import '../../../../../core/presentation/dialog/generic_dialog.dart';
-import '../../../data/dto/weather_response_dto.dart';
+import 'package:weather_app/features/weather/domain/usecases/get_forecast_use_case.dart';
+import 'package:weather_app/features/weather/presentation/bloc/home_bloc.dart';
+import 'package:weather_app/features/weather/presentation/bloc/home_event.dart';
+import 'package:weather_app/features/weather/presentation/bloc/home_state.dart';
+import '../../../../../../common/image_resources.dart';
+import '../../../../../../core/network/network_helper.dart';
+import '../../../../../../core/presentation/dialog/generic_dialog.dart';
+import '../../../../data/dto/weather_response_dto.dart';
 import 'home_bottom_sheet.dart';
 
-class HomeBody extends StatelessWidget {
+class HomeBody extends StatefulWidget {
   const HomeBody({super.key});
+
+  @override
+  State<HomeBody> createState() => _HomeBodyState();
+}
+
+class _HomeBodyState extends State<HomeBody> {
+  late Stream<HomeState> state;
+  late Sink<HomeEvent> event;
+
+  @override
+  void initState() {
+    final NetworkHelper client = NetworkHelperBuilder()
+        .setBaseUrl('http://api.weatherapi.com')
+        .addQueryInterceptor(
+            {'key': '2d1c06112751427d8b6164714221811'}).build();
+    final WeatherService service = WeatherServiceImpl(
+        client: client, networkInfoHelper: NetworkInfoHelperImpl());
+    final WeatherRepository repository =
+        WeatherRepositoryImpl(weatherService: service);
+    final usecase = GetForecastUseCase(repository: repository);
+    final block = HomeBloc(getForecastUseCase: usecase);
+    state = block.state;
+
+    event = block.event;
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -98,22 +134,33 @@ class HomeBody extends StatelessWidget {
           left: 0,
           right: 0,
           child: TextButton(
-            onPressed: () async {
-              final NetworkHelper client = NetworkHelperBuilder()
-                  .setBaseUrl('http://api.weatherapi.com')
-                  .addQueryInterceptor(
-                      {'key': '2d1c06112751427d8b6164714221811'}).build();
-              final WeatherService service = WeatherServiceImpl(client: client);
-
-              final WeatherRepository repository =
-                  WeatherRepositoryImpl(weatherService: service);
-
-              final foo = await repository.getForecast();
-              print(foo.currentDto.conditionDto.iconUrl);
+            onPressed: () {
+              event.add(GetForecastEvent());
             },
-            child: const Text(
-              'Click me',
-            ),
+            child: StreamBuilder<HomeState>(
+                stream: state,
+                builder: (_, snapshot) {
+                  if (snapshot.hasData) {
+                    final data = snapshot.requireData;
+                    if (data is LoadingState) {
+                      return const Text(
+                        'Loading',
+                      );
+                    } else if (data is SuccessfullyState) {
+                      return Text(
+                        data.weather.currentDto.windDir,
+                      );
+                    } else if (data is ErrorState) {
+                      return Text(data.message);
+                    } else {
+                      return Container();
+                    }
+                  } else {
+                    return const Text(
+                      'no data',
+                    );
+                  }
+                }),
           ),
         ),
         const HomeButtonSheet(),
