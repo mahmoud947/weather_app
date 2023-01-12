@@ -2,16 +2,28 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-import 'package:weather_app/features/weather/domain/models/forecast_day.dart';
+import 'package:weather_app/features/weather/presentation/bloc/weekly_forecast/weekly_forecast_state.dart';
+import 'package:weather_app/features/weather/presentation/pages/home/components/weekly_forecast_view/weekly_forecast_view.dart';
 import '../../../../../../common/app_strings.dart';
 import '../../../bloc/home/home_state.dart';
-import 'hourly_forecast_view.dart';
+import '../../../bloc/hourly_forecast/hourly_forecast_state.dart';
+import 'hourly_forecast_view/hourly_forecast_view.dart';
 
 import '../../../../../../common/app_colors.dart';
 
 class HomeButtonSheet extends StatefulWidget {
-  const HomeButtonSheet({super.key, required this.state});
-  final Stream<HomeState> state;
+  const HomeButtonSheet({
+    super.key,
+    required this.homeState,
+    required this.hourlyState,
+    required this.onItemSelect,
+    required this.weeklyState,
+  });
+  final Stream<HomeState> homeState;
+  final Stream<HourlyForecastState> hourlyState;
+  final Stream<WeeklyForecastState> weeklyState;
+  final Function(String time) onItemSelect;
+
   @override
   State<HomeButtonSheet> createState() => _HomeButtonSheetState();
 }
@@ -37,7 +49,7 @@ class _HomeButtonSheetState extends State<HomeButtonSheet>
       initialChildSize: 0.3,
       minChildSize: 0.3,
       maxChildSize: 0.95,
-      builder: (context, scrollController) => Container(
+      builder: (_, scrollController) => Container(
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(30), topRight: Radius.circular(30)),
@@ -84,28 +96,44 @@ class _HomeButtonSheetState extends State<HomeButtonSheet>
                       controller: _controller,
                       children: [
                         StreamBuilder<HomeState>(
-                            stream: widget.state,
-                            builder: (_, snapshot) {
-                              if (snapshot.hasData) {
-                                final currentData = snapshot.requireData;
-                                if (currentData is SuccessfullyState) {
-                                  if (currentData.weather.forecast.isNotEmpty) {
-                                    return HourlyForecastView(
-                                      controller: scrollController,
-                                      forecastDay:
-                                          currentData.weather.forecast[0]!,
-                                    );
-                                  }
+                          stream: widget.homeState,
+                          builder: (_, snapshot) {
+                            if (snapshot.hasData) {
+                              final currentData = snapshot.requireData;
+                              if (currentData is HomeSuccessfullyState) {
+                                if (currentData.weather.forecast.isNotEmpty) {
+                                  return HourlyForecastView(
+                                    controller: scrollController,
+                                    forecastDay:
+                                        currentData.weather.forecast[0]!,
+                                    onItemSelect: widget.onItemSelect,
+                                    state: widget.hourlyState,
+                                  );
                                 }
                               }
-                              return const SizedBox();
-                            }),
-                        Container(
-                          color: Colors.transparent,
-                          child: const Center(
-                            child: Text('Any'),
-                          ),
-                        )
+                            }
+                            return const SizedBox();
+                          },
+                        ),
+                        StreamBuilder<HomeState>(
+                          stream: widget.homeState,
+                          builder: (_, snapshot) {
+                            if (snapshot.hasData) {
+                              final currentData = snapshot.requireData;
+                              if (currentData is HomeSuccessfullyState) {
+                                if (currentData.weather.forecast.isNotEmpty) {
+                                  return WeeklyForecastView(
+                                    controller: scrollController,
+                                    forecastDay: currentData.weather.forecast,
+                                    onItemSelect: widget.onItemSelect,
+                                    state: widget.weeklyState,
+                                  );
+                                }
+                              }
+                            }
+                            return const SizedBox();
+                          },
+                        ),
                       ],
                     ),
                   ),

@@ -2,11 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:weather_app/features/weather/presentation/bloc/home/home_state.dart';
 import '../../../../../../common/image_resources.dart';
+import '../../../bloc/hourly_forecast/hourly_forecast_state.dart';
+import '../../../bloc/weekly_forecast/weekly_forecast_state.dart';
 import 'home_bottom_sheet.dart';
 
 class HomeBody extends StatelessWidget {
-  const HomeBody({super.key, required this.state});
+  const HomeBody({
+    super.key,
+    required this.state,
+    required this.hourlyState,
+    required this.onItemSelect,
+    required this.weeklyState,
+  });
   final Stream<HomeState> state;
+  final Stream<HourlyForecastState> hourlyState;
+  final Stream<WeeklyForecastState> weeklyState;
+  final Function(String time) onItemSelect;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +50,7 @@ class HomeBody extends StatelessWidget {
               builder: (_, snapshot) {
                 if (snapshot.hasData) {
                   final currentState = snapshot.requireData;
-                  if (currentState is SuccessfullyState) {
+                  if (currentState is HomeSuccessfullyState) {
                     return Column(
                       children: [
                         Text(
@@ -94,7 +105,12 @@ class HomeBody extends StatelessWidget {
                 }
               }),
         ),
-        HomeButtonSheet(state: state),
+        HomeButtonSheet(
+          homeState: state,
+          hourlyState: hourlyState,
+          weeklyState: weeklyState,
+          onItemSelect: onItemSelect,
+        ),
       ],
     );
   }

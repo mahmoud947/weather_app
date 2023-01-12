@@ -4,6 +4,8 @@ import 'package:weather_app/features/weather/data/repositories/weather_repositor
 import 'package:weather_app/features/weather/domain/repositories/weather_repository.dart';
 import 'package:weather_app/features/weather/domain/usecases/get_forecast_use_case.dart';
 import 'package:weather_app/features/weather/presentation/bloc/home/home_bloc.dart';
+import 'package:weather_app/features/weather/presentation/bloc/hourly_forecast/hourly_forecast_bloc.dart';
+import 'package:weather_app/features/weather/presentation/bloc/weekly_forecast/weekly_forecast_bloc.dart';
 
 import '../core/network/network_helper.dart';
 import '../core/platform/network_connection_helper.dart';
@@ -12,8 +14,14 @@ import 'app_module.dart' show ls;
 Future<void> initHomeModule() async {
 //! Blocs
 //? ...init HomeBloc
-  ls.registerFactory<HomeBloc>(
+  ls.registerLazySingleton<HomeBloc>(
       () => HomeBloc(getForecastUseCase: ls<GetForecastUseCase>()));
+
+  ls.registerLazySingleton<HourlyForecastBloc>(
+      () => HourlyForecastBloc(homeBloc: ls<HomeBloc>()));
+
+  ls.registerLazySingleton<WeeklyForecastBloc>(
+      () => WeeklyForecastBloc(homeBloc: ls<HomeBloc>()));
 
 //! UseCases
 //? ...init getForecastUseCase
