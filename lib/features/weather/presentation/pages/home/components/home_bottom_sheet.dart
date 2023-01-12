@@ -16,13 +16,15 @@ class HomeButtonSheet extends StatefulWidget {
     super.key,
     required this.homeState,
     required this.hourlyState,
-    required this.onItemSelect,
+    required this.onHourSelect,
     required this.weeklyState,
+    required this.onDaySelect,
   });
   final Stream<HomeState> homeState;
   final Stream<HourlyForecastState> hourlyState;
   final Stream<WeeklyForecastState> weeklyState;
-  final Function(String time) onItemSelect;
+  final Function(String time) onHourSelect;
+  final Function(String time) onDaySelect;
 
   @override
   State<HomeButtonSheet> createState() => _HomeButtonSheetState();
@@ -106,7 +108,7 @@ class _HomeButtonSheetState extends State<HomeButtonSheet>
                                     controller: scrollController,
                                     forecastDay:
                                         currentData.weather.forecast[0]!,
-                                    onItemSelect: widget.onItemSelect,
+                                    onItemSelect: widget.onHourSelect,
                                     state: widget.hourlyState,
                                   );
                                 }
@@ -125,7 +127,7 @@ class _HomeButtonSheetState extends State<HomeButtonSheet>
                                   return WeeklyForecastView(
                                     controller: scrollController,
                                     forecastDay: currentData.weather.forecast,
-                                    onItemSelect: widget.onItemSelect,
+                                    onItemSelect: widget.onDaySelect,
                                     state: widget.weeklyState,
                                   );
                                 }

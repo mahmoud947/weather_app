@@ -7,6 +7,7 @@ import 'package:weather_app/di/app_module.dart';
 import 'package:weather_app/features/weather/presentation/bloc/hourly_forecast/hourly_forecast_bloc.dart';
 import 'package:weather_app/features/weather/presentation/bloc/hourly_forecast/hourly_forecast_event.dart';
 import 'package:weather_app/features/weather/presentation/bloc/weekly_forecast/weekly_forecast_bloc.dart';
+import 'package:weather_app/features/weather/presentation/bloc/weekly_forecast/weekly_forecast_event.dart';
 
 import '../../bloc/home/home_bloc.dart';
 import '../../bloc/home/home_event.dart';
@@ -79,8 +80,11 @@ class _HomePageState extends State<HomePage> {
         state: _homeBloc.state,
         hourlyState: _hourlyForecastBloc.state,
         weeklyState: _weeklyForecastBloc.state,
-        onItemSelect: (time) {
+        onHourSelect: (time) {
           _hourlyForecastBloc.event.add(GetHourlyForecast(selectedTime: time));
+        },
+        onDaySelect: (time) {
+          _weeklyForecastBloc.event.add(GetWeeklyForecast(date: time));
         },
       ),
     );

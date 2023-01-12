@@ -3,12 +3,12 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sizer/sizer.dart';
 import 'package:weather_app/core/utils/extensions.dart';
 import 'package:weather_app/features/weather/domain/models/forecast_day.dart';
-import 'package:weather_app/features/weather/presentation/bloc/hourly_forecast/hourly_forecast_state.dart';
 import 'package:weather_app/features/weather/presentation/bloc/weekly_forecast/weekly_forecast_state.dart';
-import 'package:weather_app/features/weather/presentation/pages/home/components/hourly_forecast_view/widgets/perssure_widget.dart';
-import 'package:weather_app/features/weather/presentation/pages/home/components/hourly_forecast_view/widgets/wind_widget.dart';
-import 'package:weather_app/features/weather/presentation/widgets/buttom_sheet_base_card.dart';
-import 'widgets/weekly_forecast_card.dart';
+
+import '../../../../widgets/buttom_sheet_base_card.dart';
+import '../../../../widgets/perssure_widget.dart';
+import '../../../../widgets/weekly_forecast_card.dart';
+import '../../../../widgets/wind_widget.dart';
 
 class WeeklyForecastView extends StatelessWidget {
   const WeeklyForecastView(
@@ -64,77 +64,97 @@ class WeeklyForecastView extends StatelessWidget {
           ),
         ),
         SizedBox(height: 4.h),
-        // StreamBuilder<WeeklyForecastState>(
-        //     stream: state,
-        //     builder: (context, snapshot) {
-        //       if (!snapshot.hasData) {
-        //         return Container();
-        //       }
-        //       final state = snapshot.requireData;
-        //       if (state is WeeklyForecastSuccessfullyState) {
-        //         if (state.day != null) {
-        //           return Column(
-        //             children: [
-        //               Row(
-        //                 mainAxisAlignment: MainAxisAlignment.spaceAround,
-        //                 children: [
-        //                   ButtonSheetBaseCard(
-        //                     content: '${state.hour?.feelsLike.orZero()}°',
-        //                     leadingIconData: FontAwesomeIcons.temperatureFull,
-        //                     leadingText: 'FEELS LIKE',
-        //                     bottomText: 'Similar to the actual temperature',
-        //                   ),
-        //                   ButtonSheetBaseCard(
-        //                     content:
-        //                         '${state.hour?.visibility.orZero().toInt()} Km',
-        //                     leadingIconData: Icons.visibility,
-        //                     leadingText: 'VISIBILITY',
-        //                     bottomText: 'Similar to the actual visibility',
-        //                   ),
-        //                 ],
-        //               ),
-        //               SizedBox(height: 2.h),
-        //               Row(
-        //                 mainAxisAlignment: MainAxisAlignment.spaceAround,
-        //                 children: [
-        //                   WindWidget(
-        //                     content: '${state.hour?.wind}',
-        //                     leadingIconData: FontAwesomeIcons.temperatureFull,
-        //                     leadingText: 'WIND',
-        //                     unit: 'Km/h',
-        //                   ),
-        //                   ButtonSheetBaseCard(
-        //                     content: '${state.hour?.humidity.orZero()} %',
-        //                     leadingIconData: Icons.visibility,
-        //                     leadingText: 'HUMIDITY',
-        //                     bottomText: 'The dew point',
-        //                   ),
-        //                 ],
-        //               ),
-        //               SizedBox(height: 2.h),
-        //               Row(
-        //                 mainAxisAlignment: MainAxisAlignment.spaceAround,
-        //                 children: [
-        //                   PressureWidget(
-        //                     content: '${state.hour?.pressure}',
-        //                     leadingIconData: FontAwesomeIcons.temperatureFull,
-        //                     leadingText: 'PRESSURE',
-        //                   ),
-        //                   WindWidget(
-        //                     content: state.hour!.windDir,
-        //                     leadingIconData: Icons.visibility,
-        //                     leadingText: 'WIND DIR',
-        //                     unit: 'Dir',
-        //                   ),
-        //                 ],
-        //               ),
-        //               SizedBox(height: 2.h),
-        //             ],
-        //           );
-        //         }
-        //       }
-        //       return Container();
-        //     })
+        StreamBuilder<WeeklyForecastState>(
+            stream: state,
+            builder: (context, snapshot) {
+              if (!snapshot.hasData) {
+                return Container();
+              }
+              final state = snapshot.requireData;
+              if (state is WeeklyForecastSuccessfullyState) {
+                if (state.day != null) {
+                  return Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          ButtonSheetBaseCard(
+                            content: '${state.day?.day.maxTemp.orZero()}°',
+                            leadingIconData: FontAwesomeIcons.temperatureFull,
+                            leadingText: 'Max temp',
+                            bottomText: 'max temperature',
+                          ),
+                          ButtonSheetBaseCard(
+                            content: '${state.day?.day.minTemp.orZero()}°',
+                            leadingIconData: FontAwesomeIcons.temperatureFull,
+                            leadingText: 'Min temp',
+                            bottomText: 'mini temperature',
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 2.h),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          WindWidget(
+                            content: '${state.day?.day.maxWind.orZero()}',
+                            leadingIconData: FontAwesomeIcons.wind,
+                            leadingText: 'Max Wind',
+                            unit: 'Km/h',
+                          ),
+                          ButtonSheetBaseCard(
+                            content:
+                                '${state.day?.day.avgVisibility.orZero()} Km',
+                            leadingIconData: Icons.visibility,
+                            leadingText: 'VISIBILITY',
+                            bottomText: 'visibility',
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 2.h),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          ButtonSheetBaseCard(
+                            content: '${state.day?.day.avgHumidity.orZero()} %',
+                            leadingIconData: Icons.dry_cleaning,
+                            leadingText: 'HUMIDITY',
+                            bottomText: 'The dew point',
+                          ),
+                          ButtonSheetBaseCard(
+                            content: '${state.day?.day.condition.condition}',
+                            leadingIconData: Icons.gesture_sharp,
+                            leadingText: 'CONDITION',
+                            bottomText:
+                                'day may be ${state.day?.day.condition.condition}',
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 2.h),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          ButtonSheetBaseCard(
+                            content: '${state.day?.astro.sunSet}',
+                            leadingIconData: Icons.sunny,
+                            leadingText: 'SUNRISE',
+                            bottomText: 'SunSet : ${state.day?.astro.sunSet}',
+                          ),
+                          ButtonSheetBaseCard(
+                            content: '${state.day?.astro.moonRise}',
+                            leadingIconData: FontAwesomeIcons.moon,
+                            leadingText: 'MOONRISE',
+                            bottomText: 'Moonset ${state.day?.astro.moonSet}',
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 2.h),
+                    ],
+                  );
+                }
+              }
+              return Container();
+            })
       ],
     );
   }

@@ -11,13 +11,15 @@ class HomeBody extends StatelessWidget {
     super.key,
     required this.state,
     required this.hourlyState,
-    required this.onItemSelect,
+    required this.onHourSelect,
     required this.weeklyState,
+    required this.onDaySelect,
   });
   final Stream<HomeState> state;
   final Stream<HourlyForecastState> hourlyState;
   final Stream<WeeklyForecastState> weeklyState;
-  final Function(String time) onItemSelect;
+  final Function(String time) onHourSelect;
+  final Function(String time) onDaySelect;
 
   @override
   Widget build(BuildContext context) {
@@ -109,7 +111,8 @@ class HomeBody extends StatelessWidget {
           homeState: state,
           hourlyState: hourlyState,
           weeklyState: weeklyState,
-          onItemSelect: onItemSelect,
+          onHourSelect: onHourSelect,
+          onDaySelect: onDaySelect,
         ),
       ],
     );

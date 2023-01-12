@@ -1,19 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/diagnostics.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sizer/sizer.dart';
-import 'package:weather_app/common/app_colors.dart';
 import 'package:weather_app/core/utils/extensions.dart';
-import 'package:weather_app/di/app_module.dart';
 import 'package:weather_app/features/weather/domain/models/forecast_day.dart';
-import 'package:weather_app/features/weather/domain/models/hour.dart';
-import 'package:weather_app/features/weather/presentation/bloc/hourly_forecast/hourly_forecast_bloc.dart';
-import 'package:weather_app/features/weather/presentation/bloc/hourly_forecast/hourly_forecast_event.dart';
 import 'package:weather_app/features/weather/presentation/bloc/hourly_forecast/hourly_forecast_state.dart';
-import 'package:weather_app/features/weather/presentation/pages/home/components/hourly_forecast_view/widgets/perssure_widget.dart';
-import 'package:weather_app/features/weather/presentation/pages/home/components/hourly_forecast_view/widgets/wind_widget.dart';
 import 'package:weather_app/features/weather/presentation/widgets/buttom_sheet_base_card.dart';
-import 'widgets/hourly_forecast_card.dart';
+
+import '../../../../widgets/hourly_forecast_card.dart';
+import '../../../../widgets/perssure_widget.dart';
+import '../../../../widgets/wind_widget.dart';
 
 class HourlyForecastView extends StatelessWidget {
   const HourlyForecastView(
