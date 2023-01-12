@@ -38,7 +38,7 @@ class HomeBloc {
     if (event is GetForecastEvent) {
       return _getForecast();
     } else {
-      return Stream.value(const ErrorState(message: 'un known error'));
+      return Stream.value(const HomeErrorState(message: 'un known error'));
     }
   }
 
@@ -46,9 +46,10 @@ class HomeBloc {
     return Rx.fromCallable<UseCaseState<Weather>>(() => getForecastUseCase())
         .map((state) {
       if (state is Right<Weather>) {
-        return SuccessfullyState(weather: state.data);
+        return HomeSuccessfullyState(weather: state.data);
       } else {
-        return ErrorState(message: (state as Left<Weather>).failure.message);
+        return HomeErrorState(
+            message: (state as Left<Weather>).failure.message);
       }
     }).startWith(LoadingState());
   }

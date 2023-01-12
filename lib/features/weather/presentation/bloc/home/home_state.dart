@@ -8,12 +8,12 @@ abstract class HomeState {}
 class LoadingState implements HomeState {}
 
 @immutable
-class ErrorState implements HomeState {
-  const ErrorState({required this.message});
+class HomeErrorState implements HomeState {
+  const HomeErrorState({required this.message});
   final String message;
 }
 
-class SuccessfullyState implements HomeState {
-  const SuccessfullyState({required this.weather});
+class HomeSuccessfullyState implements HomeState {
+  const HomeSuccessfullyState({required this.weather});
   final Weather weather;
 }
