@@ -35,6 +35,6 @@ abstract class PlatformException implements Exception {
 }
 
 class NoInternetConnection extends PlatformException {
-  const NoInternetConnection({required String message})
-      : super(message: message);
+  const NoInternetConnection()
+      : super(message: 'check your internet connection');
 }
