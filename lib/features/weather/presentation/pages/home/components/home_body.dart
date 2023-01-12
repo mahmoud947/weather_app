@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-import 'package:weather_app/features/weather/presentation/bloc/home_state.dart';
+import 'package:weather_app/features/weather/presentation/bloc/home/home_state.dart';
 import '../../../../../../common/image_resources.dart';
 import 'home_bottom_sheet.dart';
 
@@ -94,7 +94,7 @@ class HomeBody extends StatelessWidget {
                 }
               }),
         ),
-        const HomeButtonSheet(),
+        HomeButtonSheet(state: state),
       ],
     );
   }

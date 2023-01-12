@@ -41,7 +41,7 @@ class AppThemes {
     textButtonTheme: TextButtonThemeData(
       style: ButtonStyle(
         textStyle: MaterialStateProperty.all<TextStyle>(
-          TextStyle(color: Colors.red),
+          const TextStyle(color: Colors.red),
         ),
         foregroundColor: MaterialStateProperty.all(Colors.red),
       ),

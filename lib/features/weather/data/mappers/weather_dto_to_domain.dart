@@ -97,8 +97,9 @@ extension HourDtoToDomain on HourDto? {
         pressure: 0,
       );
     }
+
     return Hour(
-        time: this!.time.orEmpty(),
+        time: this!.time.orEmpty().parseAsDateTime().timeAmPm(),
         temp: this!.temp.orZero(),
         condition: this!.conditionDto.toDomain(),
         wind: this!.wind.orZero(),

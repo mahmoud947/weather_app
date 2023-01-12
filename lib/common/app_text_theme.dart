@@ -9,6 +9,6 @@ class AppTextTheme {
     displayLarge: TextStyle(fontWeight: FontWeight.normal, fontSize: 96.sp),
     bodyMedium: TextStyle(fontWeight: FontWeight.normal, fontSize: 20.sp),
     labelMedium: TextStyle(fontWeight: FontWeight.w600, fontSize: 16.sp),
-    labelSmall: TextStyle(fontWeight: FontWeight.w600, fontSize: 14.sp),
+    labelSmall: TextStyle(fontWeight: FontWeight.w600, fontSize: 12.sp),
   );
 }

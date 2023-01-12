@@ -2,12 +2,13 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:weather_app/core/domain/data_state.dart';
+import 'package:weather_app/core/presentation/dialog/generic_dialog.dart';
 import 'package:weather_app/core/presentation/loading/lodaing_screen.dart';
 import 'package:weather_app/di/app_module.dart';
-import 'package:weather_app/features/weather/presentation/bloc/home_bloc.dart';
-import 'package:weather_app/features/weather/presentation/bloc/home_event.dart';
-import 'package:weather_app/features/weather/presentation/bloc/home_state.dart';
 
+import '../../bloc/home/home_bloc.dart';
+import '../../bloc/home/home_event.dart';
+import '../../bloc/home/home_state.dart';
 import 'components/home_body.dart';
 
 class HomePage extends StatefulWidget {
@@ -41,6 +42,17 @@ class _HomePageState extends State<HomePage> {
       (event) {
         if (event is LoadingState) {
           LoadingScreen.instance.show(context: context, text: 'text');
+        } else if (event is ErrorState) {
+          LoadingScreen.instance.hide();
+          showGenericDialog(
+            context: context,
+            title: 'error',
+            content: event.message,
+            optionBuilder: {'retry': GetForecastEvent()},
+            callBack: (event) {
+              _bloc.event.add(event);
+            },
+          );
         } else {
           LoadingScreen.instance.hide();
         }

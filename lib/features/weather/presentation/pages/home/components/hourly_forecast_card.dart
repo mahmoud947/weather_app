@@ -8,10 +8,12 @@ class HourlyForecastCard extends StatelessWidget {
     required this.time,
     required this.temp,
     required this.iconUrl,
+    required this.isSelected,
   });
   final String time;
   final String temp;
   final String iconUrl;
+  final bool isSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,7 @@ class HourlyForecastCard extends StatelessWidget {
         ),
       ),
       clipBehavior: Clip.antiAlias,
-      color: AppColors.indigo.withOpacity(1),
+      color: isSelected ? AppColors.lavender : AppColors.indigo,
       elevation: 8,
       child: Padding(
         padding: const EdgeInsets.all(8),
@@ -40,12 +42,12 @@ class HourlyForecastCard extends StatelessWidget {
               style: Theme.of(context).textTheme.labelSmall,
             ),
             Image.network(
-              'https:$iconUrl',
+              iconUrl,
               width: 50,
             ),
             Text(
               '$temp°',
-              style: Theme.of(context).textTheme.bodyMedium,
+              style: Theme.of(context).textTheme.labelSmall,
             ),
           ],
         ),

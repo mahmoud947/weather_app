@@ -1,6 +1,8 @@
 import 'package:weather_app/core/domain/data_state.dart';
 import 'package:weather_app/core/error/exceptions.dart';
+import 'package:weather_app/core/error/failure.dart';
 import 'package:weather_app/core/usecase/base_use_case.dart';
+import 'package:weather_app/core/usecase/use_case_state.dart';
 import 'package:weather_app/features/weather/domain/models/weather.dart';
 import 'package:weather_app/features/weather/domain/repositories/weather_repository.dart';
 
@@ -10,17 +12,17 @@ class GetForecastUseCase implements BaseUseCase<EmptyUseCaseInput?, Weather> {
   final WeatherRepository repository;
 
   @override
-  Stream<DataState<Weather>> call({EmptyUseCaseInput? input}) async* {
-    yield Loading<Weather>();
+  Future<UseCaseState<Weather>> call({EmptyUseCaseInput? input}) async {
     try {
       final weather = await repository.getForecast();
-      yield Successfully<Weather>(data: weather);
+      return Right<Weather>(data: weather);
     } on RemoteException catch (e) {
-      yield Error(message: e.message);
+      return Left<Weather>(failure: RemoteFailure(message: e.message));
     } on PlatformException catch (e) {
-      yield Error(message: e.message);
-    } on Exception catch (e) {
-      yield Error(message: e.toString());
+      return Left<Weather>(failure: PlatformFailure(message: e.message));
+    } on Exception {
+      return Left<Weather>(
+          failure: RemoteFailure(message: 'Unknown exception'));
     }
   }
 }

@@ -3,13 +3,13 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart' show immutable;
 import 'package:rxdart/rxdart.dart';
+import 'package:weather_app/core/usecase/use_case_state.dart';
 
 import 'package:weather_app/features/weather/domain/usecases/get_forecast_use_case.dart';
-import 'package:weather_app/features/weather/presentation/bloc/home_event.dart';
-import 'package:weather_app/features/weather/presentation/bloc/home_state.dart';
+import 'package:weather_app/features/weather/presentation/bloc/home/home_event.dart';
+import 'package:weather_app/features/weather/presentation/bloc/home/home_state.dart';
 
-import '../../../../core/domain/data_state.dart';
-import '../../domain/models/weather.dart';
+import '../../../domain/models/weather.dart';
 
 @immutable
 class HomeBloc {
@@ -28,7 +28,7 @@ class HomeBloc {
 
   Sink<HomeEvent> get event => _event.sink;
 
-  Stream<HomeState> get state => _event.stream.distinct().switchMap(
+  Stream<HomeState> get state => _event.stream.distinct().switchMap<HomeState>(
         (event) {
           return _onEvent(event: event);
         },
@@ -43,18 +43,13 @@ class HomeBloc {
   }
 
   Stream<HomeState> _getForecast() {
-    return getForecastUseCase().map(
-      (event) {
-        if (event is Successfully<Weather>) {
-          return SuccessfullyState(weather: event.data);
-        } else if (event is Loading<Weather>) {
-          return LoadingState();
-        } else if (event is Error<Weather>) {
-          return ErrorState(message: event.message);
-        } else {
-          return LoadingState();
-        }
-      },
-    );
+    return Rx.fromCallable<UseCaseState<Weather>>(() => getForecastUseCase())
+        .map((state) {
+      if (state is Right<Weather>) {
+        return SuccessfullyState(weather: state.data);
+      } else {
+        return ErrorState(message: (state as Left<Weather>).failure.message);
+      }
+    }).startWith(LoadingState());
   }
 }

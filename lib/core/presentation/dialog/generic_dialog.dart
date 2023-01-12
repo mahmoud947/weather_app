@@ -19,7 +19,7 @@ Future<T?> showGenericDialog<T>({
           title,
         ),
         content: Text(
-          title,
+          content,
         ),
         actions: option.keys.map((optionTitle) {
           final value = option[optionTitle];
@@ -36,7 +36,7 @@ Future<T?> showGenericDialog<T>({
         }).toList(),
       );
     },
-  ).then(
+  ).then<T>(
     (value) => callBack(value),
   );
 }

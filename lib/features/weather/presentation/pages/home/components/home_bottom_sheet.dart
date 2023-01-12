@@ -2,14 +2,16 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+import 'package:weather_app/features/weather/domain/models/forecast_day.dart';
 import '../../../../../../common/app_strings.dart';
+import '../../../bloc/home/home_state.dart';
 import 'hourly_forecast_view.dart';
 
 import '../../../../../../common/app_colors.dart';
 
 class HomeButtonSheet extends StatefulWidget {
-  const HomeButtonSheet({super.key});
-
+  const HomeButtonSheet({super.key, required this.state});
+  final Stream<HomeState> state;
   @override
   State<HomeButtonSheet> createState() => _HomeButtonSheetState();
 }
@@ -81,7 +83,23 @@ class _HomeButtonSheetState extends State<HomeButtonSheet>
                     child: TabBarView(
                       controller: _controller,
                       children: [
-                        HourlyForecastView(controller: scrollController),
+                        StreamBuilder<HomeState>(
+                            stream: widget.state,
+                            builder: (_, snapshot) {
+                              if (snapshot.hasData) {
+                                final currentData = snapshot.requireData;
+                                if (currentData is SuccessfullyState) {
+                                  if (currentData.weather.forecast.isNotEmpty) {
+                                    return HourlyForecastView(
+                                      controller: scrollController,
+                                      forecastDay:
+                                          currentData.weather.forecast[0]!,
+                                    );
+                                  }
+                                }
+                              }
+                              return const SizedBox();
+                            }),
                         Container(
                           color: Colors.transparent,
                           child: const Center(
