@@ -2,6 +2,7 @@
 import 'dart:async';
 
 import 'package:flutter/foundation.dart' show immutable;
+import 'package:rxdart/rxdart.dart';
 
 import 'package:weather_app/features/weather/domain/usecases/get_forecast_use_case.dart';
 import 'package:weather_app/features/weather/presentation/bloc/home_event.dart';
@@ -17,10 +18,8 @@ class HomeBloc {
     required this.getForecastUseCase,
   });
 
-  final StreamController<HomeEvent> _event =
-      StreamController<HomeEvent>.broadcast();
-  final StreamController<HomeState> _state =
-      StreamController<HomeState>.broadcast();
+  final BehaviorSubject<HomeEvent> _event = BehaviorSubject<HomeEvent>();
+  final BehaviorSubject<HomeState> _state = BehaviorSubject<HomeState>();
 
   void dispose() {
     _event.close();
@@ -29,7 +28,7 @@ class HomeBloc {
 
   Sink<HomeEvent> get event => _event.sink;
 
-  Stream<HomeState> get state => _event.stream.distinct().asyncExpand(
+  Stream<HomeState> get state => _event.stream.distinct().switchMap(
         (event) {
           return _onEvent(event: event);
         },

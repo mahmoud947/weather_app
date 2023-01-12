@@ -19,8 +19,8 @@ import '../../domain/models/weather.dart';
 extension WeatherResponseDtoToDomain on WeatherResponseDto {
   Weather toDomain() => Weather(
       forecast: forecast.toDomain(),
-      currentDto: currentDto.toDomain(),
-      locationDto: locationDto.toDomain());
+      current: currentDto.toDomain(),
+      location: locationDto.toDomain());
 }
 
 extension LocationDtoToDomain on LocationDto {

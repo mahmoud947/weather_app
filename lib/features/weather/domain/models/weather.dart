@@ -5,10 +5,10 @@ import 'location.dart';
 class Weather {
   Weather({
     required this.forecast,
-    required this.currentDto,
-    required this.locationDto,
+    required this.current,
+    required this.location,
   });
   final List<ForecastDay?> forecast;
-  final Current currentDto;
-  final Location locationDto;
+  final Current current;
+  final Location location;
 }
