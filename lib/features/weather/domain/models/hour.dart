@@ -1,6 +1,3 @@
-import 'dart:convert';
-import '../../data/dto/base_weather_condition_dto.dart';
-
 import 'base_weather_condition.dart';
 import 'condition.dart';
 

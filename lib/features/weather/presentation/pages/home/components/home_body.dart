@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/features/weather/presentation/bloc/home/home_state.dart';
+import '../../../bloc/home/home_state.dart';
 import '../../../../../../common/image_resources.dart';
 import '../../../bloc/hourly_forecast/hourly_forecast_state.dart';
 import '../../../bloc/weekly_forecast/weekly_forecast_state.dart';
@@ -97,14 +97,9 @@ class HomeBody extends StatelessWidget {
                         ),
                       ],
                     );
-                  } else if (currentState is LoadingState) {
-                    return Container();
-                  } else {
-                    return Container();
                   }
-                } else {
-                  return Text('data');
                 }
+                return const Text('data');
               }),
         ),
         HomeButtonSheet(

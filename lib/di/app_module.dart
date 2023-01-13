@@ -1,6 +1,6 @@
 import 'package:get_it/get_it.dart';
-import 'package:weather_app/core/network/network_helper.dart';
-import 'package:weather_app/core/platform/network_connection_helper.dart';
+import '../core/network/network_helper.dart';
+import '../core/platform/network_connection_helper.dart';
 
 final ls = GetIt.instance;
 

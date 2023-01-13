@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'base_weather_condition_dto.dart';
 import 'condition_dto.dart';
 

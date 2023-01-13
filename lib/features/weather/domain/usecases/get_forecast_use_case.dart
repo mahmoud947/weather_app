@@ -1,10 +1,9 @@
-import 'package:weather_app/core/domain/data_state.dart';
-import 'package:weather_app/core/error/exceptions.dart';
-import 'package:weather_app/core/error/failure.dart';
-import 'package:weather_app/core/usecase/base_use_case.dart';
-import 'package:weather_app/core/usecase/use_case_state.dart';
-import 'package:weather_app/features/weather/domain/models/weather.dart';
-import 'package:weather_app/features/weather/domain/repositories/weather_repository.dart';
+import '../../../../core/error/exceptions.dart';
+import '../../../../core/error/failure.dart';
+import '../../../../core/usecase/base_use_case.dart';
+import '../../../../core/usecase/use_case_state.dart';
+import '../models/weather.dart';
+import '../repositories/weather_repository.dart';
 
 class GetForecastUseCase implements BaseUseCase<EmptyUseCaseInput?, Weather> {
   GetForecastUseCase({required this.repository});

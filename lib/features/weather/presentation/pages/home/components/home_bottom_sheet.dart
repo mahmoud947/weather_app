@@ -2,8 +2,8 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
-import 'package:weather_app/features/weather/presentation/bloc/weekly_forecast/weekly_forecast_state.dart';
-import 'package:weather_app/features/weather/presentation/pages/home/components/weekly_forecast_view/weekly_forecast_view.dart';
+import '../../../bloc/weekly_forecast/weekly_forecast_state.dart';
+import 'weekly_forecast_view/weekly_forecast_view.dart';
 import '../../../../../../common/app_strings.dart';
 import '../../../bloc/home/home_state.dart';
 import '../../../bloc/hourly_forecast/hourly_forecast_state.dart';

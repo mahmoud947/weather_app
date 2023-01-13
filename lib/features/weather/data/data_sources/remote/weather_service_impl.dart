@@ -1,11 +1,11 @@
 import 'dart:convert';
 
-import 'package:weather_app/core/error/exceptions.dart';
-import 'package:weather_app/core/network/network_helper.dart';
-import 'package:weather_app/core/platform/network_connection_helper.dart';
-import 'package:weather_app/features/weather/data/constants/remote_constants.dart';
-import 'package:weather_app/features/weather/data/data_sources/remote/weather_service.dart';
-import 'package:weather_app/features/weather/data/dto/weather_response_dto.dart';
+import '../../../../../core/error/exceptions.dart';
+import '../../../../../core/network/network_helper.dart';
+import '../../../../../core/platform/network_connection_helper.dart';
+import '../../constants/remote_constants.dart';
+import 'weather_service.dart';
+import '../../dto/weather_response_dto.dart';
 
 class WeatherServiceImpl implements WeatherService {
   WeatherServiceImpl({

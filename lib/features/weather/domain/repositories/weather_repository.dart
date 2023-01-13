@@ -1,4 +1,4 @@
-import 'package:weather_app/features/weather/domain/models/weather.dart';
+import '../models/weather.dart';
 
 abstract class WeatherRepository {
   Future<Weather> getForecast();

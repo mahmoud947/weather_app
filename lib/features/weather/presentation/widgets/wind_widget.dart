@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:weather_app/common/image_resources.dart';
+import '../../../../common/image_resources.dart';
 
 import '../../../../../../../../common/app_colors.dart';
 

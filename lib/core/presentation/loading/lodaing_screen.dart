@@ -38,8 +38,8 @@ class LoadingScreen {
     required BuildContext context,
     required String text,
   }) {
-    final _text = StreamController<String>();
-    _text.add(text);
+    final textChange = StreamController<String>();
+    textChange.add(text);
 
     final size = MediaQuery.of(context).size;
 
@@ -74,7 +74,7 @@ class LoadingScreen {
                         height: 10,
                       ),
                       StreamBuilder<String>(
-                        stream: _text.stream,
+                        stream: textChange.stream,
                         builder: (_, snapshot) {
                           if (snapshot.hasData) {
                             return Text(
@@ -109,12 +109,12 @@ class LoadingScreen {
 
     return LoadingScreenController(
       close: () {
-        _text.close();
+        textChange.close();
         overlay.remove();
         return true;
       },
       update: (text) {
-        _text.add(text);
+        textChange.add(text);
         return true;
       },
     );

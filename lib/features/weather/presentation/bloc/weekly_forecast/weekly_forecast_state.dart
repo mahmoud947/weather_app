@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart' show immutable;
-import 'package:weather_app/features/weather/domain/models/day.dart';
-import 'package:weather_app/features/weather/domain/models/forecast_day.dart';
+import '../../../domain/models/forecast_day.dart';
 
 @immutable
 abstract class WeeklyForecastState {}

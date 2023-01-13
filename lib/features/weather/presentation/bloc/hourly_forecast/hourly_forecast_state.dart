@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart' show immutable;
 
-import 'package:weather_app/features/weather/domain/models/hour.dart';
+import '../../../domain/models/hour.dart';
 
 @immutable
 abstract class HourlyForecastState {}

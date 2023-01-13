@@ -1,11 +1,11 @@
-import 'package:weather_app/features/weather/data/data_sources/remote/weather_service.dart';
-import 'package:weather_app/features/weather/data/data_sources/remote/weather_service_impl.dart';
-import 'package:weather_app/features/weather/data/repositories/weather_repository_impl.dart';
-import 'package:weather_app/features/weather/domain/repositories/weather_repository.dart';
-import 'package:weather_app/features/weather/domain/usecases/get_forecast_use_case.dart';
-import 'package:weather_app/features/weather/presentation/bloc/home/home_bloc.dart';
-import 'package:weather_app/features/weather/presentation/bloc/hourly_forecast/hourly_forecast_bloc.dart';
-import 'package:weather_app/features/weather/presentation/bloc/weekly_forecast/weekly_forecast_bloc.dart';
+import '../features/weather/data/data_sources/remote/weather_service.dart';
+import '../features/weather/data/data_sources/remote/weather_service_impl.dart';
+import '../features/weather/data/repositories/weather_repository_impl.dart';
+import '../features/weather/domain/repositories/weather_repository.dart';
+import '../features/weather/domain/usecases/get_forecast_use_case.dart';
+import '../features/weather/presentation/bloc/home/home_bloc.dart';
+import '../features/weather/presentation/bloc/hourly_forecast/hourly_forecast_bloc.dart';
+import '../features/weather/presentation/bloc/weekly_forecast/weekly_forecast_bloc.dart';
 
 import '../core/network/network_helper.dart';
 import '../core/platform/network_connection_helper.dart';

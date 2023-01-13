@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:weather_app/core/utils/extensions.dart';
-import 'package:weather_app/features/weather/domain/models/forecast_day.dart';
-import 'package:weather_app/features/weather/presentation/bloc/hourly_forecast/hourly_forecast_state.dart';
-import 'package:weather_app/features/weather/presentation/widgets/buttom_sheet_base_card.dart';
+import '../../../../../../../core/utils/extensions.dart';
+import '../../../../../domain/models/forecast_day.dart';
+import '../../../../bloc/hourly_forecast/hourly_forecast_state.dart';
+import '../../../../widgets/buttom_sheet_base_card.dart';
 
 import '../../../../widgets/hourly_forecast_card.dart';
 import '../../../../widgets/perssure_widget.dart';
