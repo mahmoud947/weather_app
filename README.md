@@ -1,10 +1,6 @@
 # Weather APP
 
-
-
-https://user-images.githubusercontent.com/65209396/212238166-90972e06-1772-499e-bea8-e337da42332b.mp4
-
-
+https://user-images.githubusercontent.com/65209396/212238981-284d5d52-04be-42f5-802f-d8fbc0a105ed.mp4
 
 ## RXdart
 
