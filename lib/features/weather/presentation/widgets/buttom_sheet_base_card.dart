@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 
 import '../../../../common/app_colors.dart';
 
@@ -17,12 +16,21 @@ class ButtonSheetBaseCard extends StatelessWidget {
   final String bottomText;
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Container(
-      height: 20.h,
-      width: 45.w,
+      height: 0.2 * size.height,
+      width: 0.45 * size.width,
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
-        color: AppColors.darkBlue,
+        gradient: const LinearGradient(
+          begin: Alignment.topRight,
+          end: Alignment.bottomLeft,
+          colors: [
+            AppColors.pink,
+            AppColors.indigo,
+            AppColors.darkBlue,
+          ],
+        ),
         borderRadius: BorderRadius.circular(20),
       ),
       child: Column(

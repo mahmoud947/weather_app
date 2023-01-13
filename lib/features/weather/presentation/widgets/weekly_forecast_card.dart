@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 
 import '../../../../common/app_colors.dart';
 
@@ -19,22 +18,23 @@ class WeeklyForecastCard extends StatelessWidget {
   final Function(String time) onClick;
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return InkWell(
       onTap: () {
         onClick(date);
       },
       child: SizedBox(
-        height: 12.h,
-        width: 40.w,
+        height: 0.07 * size.height,
+        width: 0.35 * size.width,
         child: Stack(
           children: [
             Positioned(
-              height: 10.h,
-              top: 5.h,
+              height: 0.1 * size.height,
+              top: 0.05 * size.height,
               left: 0,
               child: SizedBox(
-                width: 30.w,
-                height: 10.h,
+                width: 0.3 * size.width,
+                height: 0.1 * size.height,
                 child: Card(
                   margin: const EdgeInsets.all(6),
                   shape: RoundedRectangleBorder(
@@ -76,7 +76,7 @@ class WeeklyForecastCard extends StatelessWidget {
               top: 0,
               child: Image.network(
                 iconUrl,
-                width: 120,
+                width: 80,
                 fit: BoxFit.cover,
               ),
             ),

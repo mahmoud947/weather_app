@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 
 import 'common/app_routes.dart';
 import 'common/app_themes.dart';
@@ -13,16 +12,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Sizer(
-      builder: (context, orientation, deviceType) {
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'Flutter Demo',
-          theme: AppThemes.appTheme,
-          themeMode: ThemeMode.system,
-          onGenerateRoute: AppRoutes.generateRoute,
-        );
-      },
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Flutter Demo',
+      theme: AppThemes.appTheme,
+      darkTheme: AppThemes.appTheme,
+      themeMode: ThemeMode.dark,
+      onGenerateRoute: AppRoutes.generateRoute,
     );
   }
 }

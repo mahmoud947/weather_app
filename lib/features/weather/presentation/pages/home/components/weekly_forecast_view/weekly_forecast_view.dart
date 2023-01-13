@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:sizer/sizer.dart';
+
 import 'package:weather_app/core/utils/extensions.dart';
 import 'package:weather_app/features/weather/domain/models/forecast_day.dart';
 import 'package:weather_app/features/weather/presentation/bloc/weekly_forecast/weekly_forecast_state.dart';
 
 import '../../../../widgets/buttom_sheet_base_card.dart';
-import '../../../../widgets/perssure_widget.dart';
 import '../../../../widgets/weekly_forecast_card.dart';
 import '../../../../widgets/wind_widget.dart';
 
@@ -24,13 +23,14 @@ class WeeklyForecastView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return ListView(
       scrollDirection: Axis.vertical,
       controller: controller,
       children: [
         SizedBox(
-          height: 21.h,
-          width: 100.w,
+          height: 0.21 * size.height,
+          width: size.width,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             itemCount: forecastDay.length,
@@ -63,7 +63,7 @@ class WeeklyForecastView extends StatelessWidget {
             },
           ),
         ),
-        SizedBox(height: 4.h),
+        SizedBox(height: 0.04 * size.height),
         StreamBuilder<WeeklyForecastState>(
             stream: state,
             builder: (context, snapshot) {
@@ -92,7 +92,7 @@ class WeeklyForecastView extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(height: 2.h),
+                      SizedBox(height: 0.02 * size.height),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
@@ -111,7 +111,7 @@ class WeeklyForecastView extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(height: 2.h),
+                      SizedBox(height: 0.02 * size.height),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
@@ -130,7 +130,7 @@ class WeeklyForecastView extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(height: 2.h),
+                      SizedBox(height: 0.02 * size.height),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
@@ -148,7 +148,7 @@ class WeeklyForecastView extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(height: 2.h),
+                      SizedBox(height: 0.04 * size.height),
                     ],
                   );
                 }

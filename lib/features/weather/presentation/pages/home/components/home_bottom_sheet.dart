@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
+
 import 'package:weather_app/features/weather/presentation/bloc/weekly_forecast/weekly_forecast_state.dart';
 import 'package:weather_app/features/weather/presentation/pages/home/components/weekly_forecast_view/weekly_forecast_view.dart';
 import '../../../../../../common/app_strings.dart';
@@ -47,6 +47,7 @@ class _HomeButtonSheetState extends State<HomeButtonSheet>
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return DraggableScrollableSheet(
       initialChildSize: 0.3,
       minChildSize: 0.3,
@@ -92,8 +93,8 @@ class _HomeButtonSheetState extends State<HomeButtonSheet>
                     ],
                   ),
                   SizedBox(
-                    height: 90.h,
-                    width: 100.w,
+                    height: 0.9 * size.height,
+                    width: size.width,
                     child: TabBarView(
                       controller: _controller,
                       children: [

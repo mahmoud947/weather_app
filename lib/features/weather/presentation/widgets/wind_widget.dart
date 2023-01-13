@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:sizer/sizer.dart';
+
 import 'package:weather_app/common/image_resources.dart';
 
 import '../../../../../../../../common/app_colors.dart';
@@ -20,12 +19,21 @@ class WindWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Container(
-      height: 20.h,
-      width: 45.w,
+      height: 0.2 * size.height,
+      width: 0.45 * size.width,
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
-        color: AppColors.darkBlue,
+        gradient: const LinearGradient(
+          begin: Alignment.topRight,
+          end: Alignment.bottomLeft,
+          colors: [
+            AppColors.pink,
+            AppColors.indigo,
+            AppColors.darkBlue,
+          ],
+        ),
         borderRadius: BorderRadius.circular(20),
       ),
       child: Column(
@@ -55,10 +63,10 @@ class WindWidget extends StatelessWidget {
             Image.asset(
               ImageResources.compass,
               color: Colors.grey.shade400,
-              width: 32.w,
+              width: 0.32 * size.width,
             ),
             Positioned(
-              top: 0.w,
+              top: 0,
               left: 0,
               bottom: 0,
               right: 0,
@@ -71,7 +79,7 @@ class WindWidget extends StatelessWidget {
                     style: Theme.of(context)
                         .textTheme
                         .labelSmall
-                        ?.copyWith(fontSize: 14.sp),
+                        ?.copyWith(fontSize: 14),
                   ),
                   Text(
                     unit,
@@ -79,7 +87,7 @@ class WindWidget extends StatelessWidget {
                     style: Theme.of(context)
                         .textTheme
                         .labelSmall
-                        ?.copyWith(fontSize: 12.sp),
+                        ?.copyWith(fontSize: 12),
                   ),
                 ],
               ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 import 'app_colors.dart';
 import 'app_text_theme.dart';
 
@@ -23,16 +22,16 @@ class AppThemes {
     bottomSheetTheme: BottomSheetThemeData(
       backgroundColor: Colors.black.withOpacity(0),
     ),
-    dialogTheme: DialogTheme(
+    dialogTheme: const DialogTheme(
       backgroundColor: Colors.white,
       titleTextStyle: TextStyle(
         color: Colors.black87,
-        fontSize: 11.sp,
+        fontSize: 11,
         fontWeight: FontWeight.bold,
       ),
       contentTextStyle: TextStyle(
         color: Colors.black87,
-        fontSize: 11.sp,
+        fontSize: 11,
         fontWeight: FontWeight.normal,
       ),
       iconColor: Colors.blue,

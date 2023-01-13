@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 import 'package:weather_app/features/weather/presentation/bloc/home/home_state.dart';
 import '../../../../../../common/image_resources.dart';
 import '../../../bloc/hourly_forecast/hourly_forecast_state.dart';
@@ -23,6 +22,7 @@ class HomeBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Stack(
       children: [
         Positioned(
@@ -36,15 +36,15 @@ class HomeBody extends StatelessWidget {
           ),
         ),
         Positioned(
-          top: 50.h,
-          right: 12.w,
-          left: 12.w,
+          top: 0.5 * size.height,
+          right: 0.12 * size.width,
+          left: 0.12 * size.width,
           child: Image.asset(
             ImageResources.homeIcon,
           ),
         ),
         Positioned(
-          top: 10.h,
+          top: 0.1 * size.height,
           left: 0,
           right: 0,
           child: StreamBuilder<HomeState>(
@@ -76,7 +76,7 @@ class HomeBody extends StatelessWidget {
                               ),
                           textAlign: TextAlign.center,
                         ),
-                        SizedBox(height: 2.h),
+                        SizedBox(height: 0.02 * size.height),
                         Wrap(
                           alignment: WrapAlignment.center,
                           children: [
@@ -86,7 +86,7 @@ class HomeBody extends StatelessWidget {
                               textAlign: TextAlign.center,
                             ),
                             SizedBox(
-                              width: 5.w,
+                              width: 0.05 * size.height,
                             ),
                             Text(
                               'L:${currentState.weather.forecast[0]?.day.minTemp}°',

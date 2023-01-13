@@ -47,9 +47,10 @@ class HomeBloc {
         .map((state) {
       if (state is Right<Weather>) {
         return HomeSuccessfullyState(weather: state.data);
+      } else if (state is Left<Weather>) {
+        return HomeErrorState(message: state.failure.message);
       } else {
-        return HomeErrorState(
-            message: (state as Left<Weather>).failure.message);
+        return LoadingState();
       }
     }).startWith(LoadingState());
   }

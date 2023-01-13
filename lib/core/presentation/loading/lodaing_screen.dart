@@ -41,8 +41,7 @@ class LoadingScreen {
     final _text = StreamController<String>();
     _text.add(text);
 
-    final renderBox = context.findRenderObject() as RenderBox;
-    final size = renderBox.size;
+    final size = MediaQuery.of(context).size;
 
     final overlay = OverlayEntry(
       builder: (context) {
@@ -86,6 +85,7 @@ class LoadingScreen {
                                   .labelSmall
                                   ?.copyWith(
                                     color: AppColors.darkIndigo,
+                                    fontSize: 14,
                                   ),
                             );
                           } else {

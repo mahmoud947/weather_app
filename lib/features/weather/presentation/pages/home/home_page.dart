@@ -30,10 +30,10 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     _homeBloc = ls<HomeBloc>();
+    _homeBloc.event.add(GetForecastEvent());
     _hourlyForecastBloc = ls<HourlyForecastBloc>();
     _weeklyForecastBloc = ls<WeeklyForecastBloc>();
 
-    _homeBloc.event.add(GetForecastEvent());
     _hourlyForecastBloc.start();
     _weeklyForecastBloc.start();
     super.initState();
@@ -53,7 +53,7 @@ class _HomePageState extends State<HomePage> {
     _isLoading = _homeBloc.state.listen(
       (event) {
         if (event is LoadingState) {
-          LoadingScreen.instance.show(context: context, text: 'text');
+          LoadingScreen.instance.show(context: context, text: 'Loading');
         } else if (event is HomeErrorState) {
           LoadingScreen.instance.hide();
           showGenericDialog(
@@ -65,7 +65,7 @@ class _HomePageState extends State<HomePage> {
               _homeBloc.event.add(event);
             },
           );
-        } else {
+        } else if (event is HomeSuccessfullyState) {
           LoadingScreen.instance.hide();
         }
       },
